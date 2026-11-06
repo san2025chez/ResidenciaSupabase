@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro de alumnos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="tarjeta">
+    <h1>Registro de alumnos</h1>
+    <p class="ayuda">Práctica con datos ficticios: no escribas datos reales.</p>
+
+    <form id="form-alumno">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" name="nombre" type="text" maxlength="80" autocomplete="off" required>
+
+      <label for="email">Correo electrónico</label>
+      <input id="email" name="email" type="email" autocomplete="off" required>
+
+      <label for="curso">Curso</label>
+      <select id="curso" name="curso" required>
+        <option value="">Elegí un curso</option>
+        <option value="1.° año">1.° año</option>
+        <option value="2.° año">2.° año</option>
+        <option value="3.° año">3.° año</option>
+        <option value="4.° año">4.° año</option>
+        <option value="5.° año">5.° año</option>
+      </select>
+
+      <button id="btn-guardar" type="submit">Guardar</button>
+    </form>
+
+    <p id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></p>
+  </main>
+
+  <section class="tarjeta">
+    <h2>Registros guardados</h2>
+    <p class="ayuda">Se leen de la tabla de Supabase (sin el correo).</p>
+    <p id="estado-lista" class="ayuda">Cargando...</p>
+    <ul id="lista-alumnos" class="registros"></ul>
+  </section>
+
+  <!-- Cliente oficial de Supabase (versión fija). Define una variable global llamada "supabase". -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
