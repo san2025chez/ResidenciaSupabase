@@ -15,10 +15,14 @@ function mostrarMensaje(texto, tipo) {
 }
 
 // PASO 1: crear el cliente de Supabase (URL del proyecto + clave publicable)
-//NEXT_PUBLIC_SUPABASE_URL=https://hwzuuvtcfqeeekhodjsf.supabase.co
-//NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_8ESvU7-lxskTAXXJTqjVYg_QKnJ2n83
-const SUPABASE_URL = "https://hwzuuvtcfqeeekhodjsf.supabase.co";
-const SUPABASE_KEY = "sb_publishable_8ESvU7-lxskTAXXJTqjVYg_QKnJ2n83"; // empieza con sb_publishable_ ; NUNCA la clave secreta
+// Los valores se leen del archivo .env (Vite solo expone las variables que empiezan con VITE_).
+// El "?." evita un error si import.meta.env no existe (por ejemplo, al abrir con Live Server).
+const SUPABASE_URL = import.meta.env?.VITE_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY; // empieza con sb_publishable_ ; NUNCA la clave secreta
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  mostrarMensaje("Faltan las variables del .env. Levantá el proyecto con: npm run dev", "error");
+  throw new Error("Faltan VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY. Usá npm run dev (no Live Server).");
+}
 const { createClient } = supabase;
 //createClient no hace ningún pedido todavía; solo guarda a dónde y 
 //con qué clave se van a hacer los pedidos. 
@@ -29,7 +33,7 @@ console.log("conexion",cliente)
 
 // PASO 2: escuchar el evento submit del formulario
 formulario.addEventListener("submit", async (evento) => {
-  //evento.preventDefault();
+  evento.preventDefault(); // evita que el formulario recargue la página
   console.log("se envió el formulario");
 
   // PASO 3: leer los valores que escribió la persona

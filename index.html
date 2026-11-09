@@ -43,6 +43,7 @@
 
   <!-- Cliente oficial de Supabase (versión fija). Define una variable global llamada "supabase". -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
-  <script src="app.js"></script>
+  <!-- type="module" es necesario para que Vite reemplace import.meta.env con los valores del .env -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>
