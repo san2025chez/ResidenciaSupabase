@@ -8,9 +8,18 @@ Proyecto de práctica para clase: un formulario web que **guarda, lista y elimin
 
 ![Diagrama de arquitectura del proyecto](docs/diagrama.svg)
 
+El proyecto sigue el modelo **cliente-servidor**:
+
+- **Cliente:** el navegador, que ejecuta `index.html`, `styles.css` y `app.js`. Durante el desarrollo, Vite es un servidor local que solo entrega estos archivos; no guarda datos.
+- **Servidor:** **Supabase**, en la nube. No hace falta programar un servidor propio porque Supabase ya trae:
+  - un **servidor de API** (PostgREST) que recibe los pedidos HTTPS del navegador;
+  - una **base de datos PostgreSQL** que guarda la tabla `alumnos` y aplica los permisos y las políticas de seguridad.
+
+Recorrido de un pedido:
+
 1. La persona completa el formulario en `index.html`.
-2. `app.js` lee los valores y, con el cliente de `supabase-js`, envía la petición a la API REST de Supabase.
-3. Supabase identifica la clave publicable como el rol **`anon`**, comprueba los **permisos de tabla (GRANT)** y luego las **políticas RLS**.
+2. `app.js` lee los valores y, con el cliente de `supabase-js`, envía la petición por internet al servidor de la API de Supabase.
+3. El servidor identifica la clave publicable como el rol **`anon`** y la base de datos comprueba los **permisos de tabla (GRANT)** y luego las **políticas RLS**.
 4. Si todo está permitido, se ejecuta la operación sobre la tabla `public.alumnos` y se devuelve `{ data, error, status }`.
 5. `app.js` muestra un mensaje y vuelve a cargar la lista de registros.
 
