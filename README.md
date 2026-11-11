@@ -107,10 +107,4 @@ La versión terminada está en `respaldo/app.final.js`.
 - **Políticas de práctica:** cualquier persona con la clave publicable puede insertar, leer y borrar filas. En un sistema real hace falta inicio de sesión y políticas que limiten qué filas puede tocar cada usuario.
 - Al terminar la práctica, cada script SQL incluye al final los comandos para quitar las políticas y permisos.
 
-## Scripts disponibles
 
-| Comando | Descripción |
-|---|---|
-| `npm run dev` | Servidor de desarrollo |
-| `npm run build` | Genera la versión de producción en `dist/` |
-| `npm run preview` | Sirve localmente la versión de `dist/` |
